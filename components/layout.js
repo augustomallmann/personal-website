@@ -1,9 +1,9 @@
-import Nav from "./nav";
+import Header from "./Header";
 
 const Layout = ({ children, categories, seo }) => (
   <>
-    <Nav categories={categories} />
-    {children}
+    <Header categories={categories} />
+    {children},
   </>
 );
 

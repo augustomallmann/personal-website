@@ -6,9 +6,12 @@ import Image from "../../components/image";
 import Seo from "../../components/seo";
 import { getStrapiMedia } from "../../lib/media";
 
+import { Container } from "@material-ui/core";
+import { Facebook, Twitter } from "react-sharingbuttons";
+import "react-sharingbuttons/dist/main.css";
+
 const Article = ({ article, categories }) => {
   const imageUrl = getStrapiMedia(article.image);
-
   const seo = {
     metaTitle: article.title,
     metaDescription: article.description,
@@ -29,7 +32,9 @@ const Article = ({ article, categories }) => {
         <h1>{article.title}</h1>
       </div>
       <div className="uk-section">
-        <div className="uk-container uk-container-small">
+        <Container maxWidth="md">
+          <Facebook url={`http://www.google.com`} />
+          <Twitter url={`http://www.google.com`} />
           <ReactMarkdown source={article.content} escapeHtml={false} />
           <hr className="uk-divider-small" />
           <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
@@ -54,7 +59,7 @@ const Article = ({ article, categories }) => {
               </p>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
     </Layout>
   );

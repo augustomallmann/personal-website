@@ -3,13 +3,29 @@ import Head from "next/head";
 import { createContext } from "react";
 import { getStrapiMedia } from "../lib/media";
 import { fetchAPI } from "../lib/api";
-
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Paper } from "@material-ui/core/";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import "../assets/scss/main.scss";
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({});
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: "#001f31",
+      main: "#2c465a",
+      dark: "#00000a",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "#e6504b",
+      main: "#ff8277",
+      dark: "#ae1523",
+      contrastText: "#000",
+    },
+  },
+});
 const MyApp = ({ Component, pageProps }) => {
   const { global } = pageProps;
 
@@ -29,9 +45,13 @@ const MyApp = ({ Component, pageProps }) => {
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js" />
       </Head>
-      <GlobalContext.Provider value={global}>
-        <Component {...pageProps} />
-      </GlobalContext.Provider>
+      <ThemeProvider theme={theme}>
+        <Paper>
+          <GlobalContext.Provider value={global}>
+            <Component {...pageProps} />
+          </GlobalContext.Provider>
+        </Paper>
+      </ThemeProvider>
     </>
   );
 };
